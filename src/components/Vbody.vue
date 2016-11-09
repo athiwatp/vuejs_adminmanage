@@ -163,11 +163,13 @@
 </style>
 
 <script>
+  import Bus from '../bus.js';
   export default {
     data() {
       return {
         msg:'',
         titleName:'',
+        text:'',
         showBtn:false,
         isPro:false,
         isMod:false,
@@ -231,14 +233,21 @@
         }
       };
     },
+    ready() {
+        Bus.$on('loadSuccess', text => {
+          this.show = true;
+          this.status = 'loadSuccess'
+          if (text) {
+            this.text = text;
+            alert(this.text)
+            }
+          })
+        },
     created: function () {
-    alert(localStorage.user)
         this.showBtn=(localStorage.user==undefined)?false:true
     },
-    watch:{
-      localStorage.user:function(val){
-        this.showBtn=(localStorage.user==undefined)?false:true
-      }
+    mounted:function(){
+        console.log(this.$parent)
     },
     methods:{
       newProject:function(){

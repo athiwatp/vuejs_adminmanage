@@ -14,7 +14,6 @@ import Vhead from './components/Vhead'
 import Vbody from './components/Vbody'
 import Vfoot from './components/Vfoot'
 
-
 export default {
   name: 'app',
   components: {

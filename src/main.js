@@ -4,7 +4,6 @@ import 'element-ui/lib/theme-default/index.css'
 import App from './App'
 
 Vue.use(ElementUI)
-
 new Vue({
   el: '#app',
   template: '<App/>',

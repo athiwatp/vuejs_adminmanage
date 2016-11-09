@@ -54,6 +54,7 @@
 
 </style>
 <script>
+    import Bus from '../bus.js';
     export default{
         data(){
             return{
@@ -65,9 +66,9 @@
         methods:{
             login:function(){
                 alert(this.loginName)
-                alert(this.loginPwd)
                 $("#signin").modal('hide')
                 localStorage.user=1;
+                Bus.$emit('loadSuccess', this.loginName);
             }
         }
     }
