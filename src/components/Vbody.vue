@@ -3,7 +3,6 @@
       <div class="col-md-3 list-left">
         <el-tree :data="data" :highlight-current="true" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
       </div>
-
       <div class="col-md-9 list-right">
         <h3>{{titleName}}</h3>
         <div v-show="!(isPro||isMod||isInt)" class="">
@@ -233,21 +232,10 @@
         }
       };
     },
-    ready() {
-        Bus.$on('loadSuccess', text => {
-          this.show = true;
-          this.status = 'loadSuccess'
-          if (text) {
-            this.text = text;
-            alert(this.text)
-            }
-          })
-        },
-    created: function () {
-        this.showBtn=(localStorage.user==undefined)?false:true
-    },
-    mounted:function(){
-        console.log(this.$parent)
+    computed:{
+        showBtn:function(){
+            return Boolean(Number(this.$store.state.usertype))
+        }
     },
     methods:{
       newProject:function(){
@@ -269,9 +257,7 @@
           this.isInt=true
       },
       handleNodeClick:function(obj,node,self){
-        console.log(obj)
-        console.log(node)
-        console.log(self)
+        console.log(this.$store.state)
         this.msg=obj.label
         this.titleName=obj.label
         switch (node.level){

@@ -67,8 +67,9 @@
             login:function(){
                 alert(this.loginName)
                 $("#signin").modal('hide')
-                localStorage.user=1;
-                Bus.$emit('loadSuccess', this.loginName);
+                console.log(this.$store)
+                localStorage.usertype=this.loginName
+                this.$store.commit('changeType',localStorage.usertype)
             }
         }
     }
