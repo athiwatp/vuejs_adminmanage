@@ -1,6 +1,8 @@
 <template>
-    <div class="container-fluid" style="margin-bottom:80px">
+  <div class="container-fluid" style="margin-bottom:80px">
       <div class="col-md-3 list-left">
+        <router-view></router-view>
+
         <el-tree :data="data" :highlight-current="true" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
       </div>
       <div class="col-md-9 list-right">

@@ -4,6 +4,8 @@
       <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" style="cursor: context-menu;">{{headTitle}}</a>
+          <router-link to="/anasiy"  class="navbar-brand" style="cursor: context-menu;">报表</router-link>
+          <router-link to="/about" class="navbar-brand" style="cursor: context-menu;">关于</router-link>
         </div>
         <div class="navbar-right">
           <form class="navbar-form navbar-left" role="search">
@@ -13,7 +15,8 @@
             <button type="submit" class="btn btn-default">搜索</button>
           </form>
           <ul class="nav navbar-nav">
-            <li><a data-toggle="modal" data-target="#signin" style="cursor:pointer">登录</a></li>
+            <li v-if="showloginout" @click="loginout" ><a style="cursor:pointer">退出</a></li>
+            <li v-if="showlogin"><a data-toggle="modal" data-target="#signin" style="cursor:pointer">登录</a></li>
           </ul>
         </div>
       </div>
@@ -54,21 +57,29 @@
 
 </style>
 <script>
-    import Bus from '../bus.js';
     export default{
         data(){
             return{
                 loginName:'',
                 loginPwd:'',
+                showloginout:false,
+                showlogin:true,
                 headTitle:'后台接口管理系统'
             }
         },
         methods:{
             login:function(){
-                alert(this.loginName)
+                this.showloginout=true,
+                this.showlogin=false,
                 $("#signin").modal('hide')
                 console.log(this.$store)
                 localStorage.usertype=this.loginName
+                this.$store.commit('changeType',localStorage.usertype)
+            },
+            loginout:function(){
+                this.showloginout=false,
+                this.showlogin=true,
+                localStorage.usertype=0
                 this.$store.commit('changeType',localStorage.usertype)
             }
         }
